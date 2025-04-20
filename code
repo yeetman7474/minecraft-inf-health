@@ -1,0 +1,33 @@
+
+import pymem
+import time
+import struct
+
+# Define the address of gold (replace this with the actual address you found with Cheat Engine)
+GOLD_ADDRESS = 0x12345678  # Replace with the actual memory address of gold
+
+# The infinite gold value you want
+INFINITE_GOLD = 9999999
+
+# Attach to the game process (Total War: Shogun 2)
+pm = pymem.Pymem('Shogun2.exe')
+
+# Main loop to constantly set the gold to infinite value
+def set_infinite_gold():
+    while True:
+        try:
+            # Read the current value at the GOLD_ADDRESS
+            current_gold = pm.read_int(GOLD_ADDRESS)
+            
+            # If the current value isn't what we want, update it
+            if current_gold != INFINITE_GOLD:
+                pm.write_int(GOLD_ADDRESS, INFINITE_GOLD)  # Set gold to infinite
+            time.sleep(1)  # Check every 1 second (you can adjust this)
+        
+        except KeyboardInterrupt:
+            print("Exiting the script.")
+            break
+
+if __name__ == "__main__":
+    set_infinite_gold() 
+you need pymen pip install pymen
